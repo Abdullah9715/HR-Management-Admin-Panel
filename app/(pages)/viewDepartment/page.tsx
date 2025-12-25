@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import PaginationBar from "@/app/components/paginationBar/PaginationBar";
 import { FormData } from "../../constants/types";
 import TRASH from "../../assets/icons/trash 01.svg";
@@ -9,7 +10,7 @@ import React from "react";
 import useViewDepartment from "./useViewDepartment";
 import { EMPLOYEE_TABLE_HEAD } from "./employeeTableHeader";
 
-export default function Page() {
+function ViewDepartmentContent() {
   const {
     currentEmployees,
     currentPage,
@@ -84,5 +85,13 @@ export default function Page() {
         setItemsPerPage={setItemsPerPage}
       />
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ViewDepartmentContent />
+    </Suspense>
   );
 }
