@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import ApexChart from "../../components/chart/Chart";
+import dynamic from "next/dynamic";
 import HomeBox from "../../components/homeBox/HomeBox";
 import AttendenceTable from "../../components/attendeceTable/AttendenceTable";
 import useDashboard from "./useDashboard";
@@ -8,6 +8,10 @@ import employee from "../../assets/icons/Button.svg";
 import APPLICANT from "../../assets/icons/Button (1).svg";
 import ATTENDENCE from "../../assets/icons/Button (2).svg";
 import PROJECT from "../../assets/icons/Button (3).svg";
+
+const ApexChart = dynamic(() => import("../../components/chart/Chart"), {
+  ssr: false,
+});
 
 export default function Dashboard() {
   const { numberOfEmployees } = useDashboard();

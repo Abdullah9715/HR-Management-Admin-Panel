@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/redux/storeHook";
 import { updateEmployee } from "@/redux/slices/employee";
@@ -24,7 +25,7 @@ function SuspenseLoader() {
   return <Loader />;
 }
 
-export default function EditEmployee() {
+function EditEmployeeContent() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [formData, setFormData] = useState<Data>({ id: "" });
   const [loading, setLoading] = useState(false);
@@ -112,5 +113,13 @@ export default function EditEmployee() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function EditEmployee() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EditEmployeeContent />
+    </Suspense>
   );
 }

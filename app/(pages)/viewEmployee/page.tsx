@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import EmployeeSidebarProfile from "@/app/components/employeeSidebarProfile/EmployeeSidebarProfile";
 import ViewEmployeeSidebar from "@/app/components/viewEmployeeSidebar/ViewEmployeeSidebar";
 import ViewLeaveTable from "@/app/components/viewLeaveTable/ViewLeaveTable";
@@ -11,7 +12,8 @@ import React from "react";
 
 import IndividualAttendenceTable from "@/app/components/individualAttendenceTable/individualAttendenceTable";
 import useViewEmployee from "./useViewEmployee";
-export default function ViewEmployee() {
+
+function ViewEmployeeContent() {
   const { result, selectedTab, setSelectedTab } = useViewEmployee();
 
   return (
@@ -60,5 +62,13 @@ export default function ViewEmployee() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ViewEmployee() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ViewEmployeeContent />
+    </Suspense>
   );
 }
